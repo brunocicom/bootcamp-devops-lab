@@ -7,7 +7,7 @@ namespace BootcampDevOpsLab.Unit.Tests
     public class UnitMathTest
     {
         [Theory]
-        [InlineData(2, 3, 4)]
+        [InlineData(2, 3, 5)]
         [InlineData(5, 6, 11)]
         public void AddTest(int firstValue, int secondValue, int expected)
         {
