@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using BootcampDevOpsLab.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BootcampDevOpsLab.Models;
 
 namespace BootcampDevOpsLab.Controllers
 {
@@ -20,6 +16,14 @@ namespace BootcampDevOpsLab.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(decimal milhas)
+        {
+            ViewData["milhas"] = milhas;
+            ViewBag.Quilometros = milhas * 1.6m;
             return View();
         }
 

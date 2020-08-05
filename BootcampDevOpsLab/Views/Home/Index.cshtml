@@ -6,3 +6,37 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <h1>Conversão de distâncias</h1>
+    </div>
+</div>
+<div class="row">
+    <form method="post">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Milhas</label>
+                @if (ViewData["milhas"] != null)
+                {
+                    <input type="text" name="milhas" value="@ViewData["milhas"]" class="form-control" />
+                }
+                else
+                {
+                    <input type="text" name="milhas" class="form-control" />
+                }
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success">Calcular</button>
+        </div>
+    </form>
+</div>
+@if (ViewBag.Quilometros != null)
+{
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <p>@Html.Raw(string.Format("Valor em quilômetros: {0} km", ViewBag.Quilometros))</p>
+        </div>
+    </div>
+}
