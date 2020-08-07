@@ -50,7 +50,7 @@ namespace BootcampDevOpsLab.Integrated.Tests
 
         [Theory]
         //[InlineData(Browser.Firefox, 100, 160)]
-        [InlineData(Browser.Chrome, 100, 161)]
+        [InlineData(Browser.Chrome, 100, 160)]
         public void TestarConversaoDistancia(Browser browser, double valorMilhas, double valorKm)
         {
             TelaConversaoDistancias tela = new TelaConversaoDistancias(_configuration, browser);
