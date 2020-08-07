@@ -4,12 +4,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Microsoft.Extensions.Configuration;
 
-namespace ConversorDistancias.Testes
+namespace BootcampDevOpsLab.Integrated.Tests.POM
 {
     public class TelaConversaoDistancias
     {
-
-
         public TelaConversaoDistancias(IConfiguration configuration, Browser browser)
         {
             _configuration = configuration;
@@ -38,7 +36,7 @@ namespace ConversorDistancias.Testes
         {
             _driver.Submit(By.Id("btnConverter"));
 
-            WebDriverWait wait = new WebDriverWait( _driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             wait.Until((d) => d.FindElement(By.Id("DistanciaKm")) != null);
         }
 

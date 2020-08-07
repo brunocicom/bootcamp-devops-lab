@@ -36,7 +36,7 @@
     <br />
     <div class="row">
         <div class="col-md-12">
-            <p id="DistanciaKm">@Html.Raw(string.Format("Valor em quilômetros: {0} km", ViewBag.Quilometros))</p>
+            <p>@Html.Raw(string.Format("Valor em quilômetros: <span id=\"DistanciaKm\">{0}</span> km", ViewBag.Quilometros))</p>
         </div>
     </div>
 }

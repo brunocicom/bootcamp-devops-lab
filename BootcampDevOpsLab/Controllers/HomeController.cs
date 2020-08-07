@@ -2,16 +2,22 @@
 using BootcampDevOpsLab.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using BootcampDevOpsLab.Services.Interfaces;
 
 namespace BootcampDevOpsLab.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMathService _mathService;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            IMathService mathService,
+            ILogger<HomeController> logger)
         {
             _logger = logger;
+            _mathService = mathService;
         }
 
         public IActionResult Index()
@@ -23,7 +29,7 @@ namespace BootcampDevOpsLab.Controllers
         public IActionResult Index(decimal milhas)
         {
             ViewData["milhas"] = milhas;
-            ViewBag.Quilometros = milhas * 1.6m;
+            ViewBag.Quilometros = _mathService.Multiply(milhas, 1.6m);
             return View();
         }
 

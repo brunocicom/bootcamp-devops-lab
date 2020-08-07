@@ -1,21 +1,22 @@
 using Xunit;
 using System;
-using BootcampDevOpsLab.Models;
+using BootcampDevOpsLab.Services;
+using BootcampDevOpsLab.Services.Interfaces;
 
-namespace BootcampDevOpsLab.Integrated.Tests
+namespace BootcampDevOpsLab.Unit.Tests
 {
-    public class IntegratedMathTest
+    public class MathServiceTest
     {
         [Theory]
         [InlineData(2, 3, 5)]
         [InlineData(5, 6, 11)]
-        public void AddTest(int firstValue, int secondValue, int expected)
+        public void AddTest(decimal firstValue, decimal secondValue, decimal expected)
         {
             // Arrange
-            SimpleMath math = new SimpleMath();
+            IMathService math = new MathService();
 
             // Act
-            int actual = math.Add(firstValue, secondValue);
+            decimal actual = math.Add(firstValue, secondValue);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -24,13 +25,13 @@ namespace BootcampDevOpsLab.Integrated.Tests
         [Theory]
         [InlineData(5, 2, 3)]
         [InlineData(7, 8, -1)]
-        public void SobtractTest(int firstValue, int secondValue, int expected)
+        public void SobtractTest(decimal firstValue, decimal secondValue, decimal expected)
         {
             // Arrange
-            SimpleMath math = new SimpleMath();
+            IMathService math = new MathService();
 
             // Act
-            int actual = math.Subtract(firstValue, secondValue);
+            decimal actual = math.Subtract(firstValue, secondValue);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -41,7 +42,7 @@ namespace BootcampDevOpsLab.Integrated.Tests
         public void DivideTest(int firstValue, int secondValue, int expected)
         {
             // Arrange
-            SimpleMath math = new SimpleMath();
+            IMathService math = new MathService();
 
             // Act
             decimal actual = math.Divide(firstValue, secondValue);
@@ -54,7 +55,7 @@ namespace BootcampDevOpsLab.Integrated.Tests
         public void DivideTest_ThrowsException()
         {
             // Arrange
-            SimpleMath math = new SimpleMath();
+            IMathService math = new MathService();
 
             // Act & Assert
             Assert.Throws<DivideByZeroException>(() => math.Divide(10, 0));
