@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using Selenium.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using Selenium.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace ConversorDistancias.Testes
 {
@@ -32,9 +30,9 @@ namespace ConversorDistancias.Testes
         private readonly IConfiguration _configuration;
         private IWebDriver _driver;
 
-        public void CarregarPagina() => _driver.LoadPage(TimeSpan.FromSeconds(5), _configuration.GetSection("Selenium:UrlTelaConversaoDistancias").Value);
+        public void CarregarPagina() => _driver.LoadPage(TimeSpan.FromSeconds(15), _configuration.GetSection("Selenium:UrlTelaConversaoDistancias").Value);
 
-        public void PreencherDistanciaMilhas(double valor) => _driver.SetText(By.Name("DistanciaMilhas"), valor.ToString());
+        public void PreencherDistanciaMilhas(double valor) => _driver.SetText(By.Name("milhas"), valor.ToString());
 
         public void ProcessarConversao()
         {

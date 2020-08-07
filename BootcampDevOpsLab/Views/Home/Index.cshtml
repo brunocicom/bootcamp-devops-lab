@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="col-md-12">
-            <button type="submit" class="btn btn-success">Calcular</button>
+            <button type="submit" class="btn btn-success" id="btnConverter">Calcular</button>
         </div>
     </form>
 </div>
@@ -36,7 +36,7 @@
     <br />
     <div class="row">
         <div class="col-md-12">
-            <p>@Html.Raw(string.Format("Valor em quilômetros: {0} km", ViewBag.Quilometros))</p>
+            <p id="DistanciaKm">@Html.Raw(string.Format("Valor em quilômetros: {0} km", ViewBag.Quilometros))</p>
         </div>
     </div>
 }
