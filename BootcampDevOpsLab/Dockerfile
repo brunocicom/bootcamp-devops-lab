@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:latest AS build
+FROM mcr.microsoft.com/dotnet/core/sdk AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -10,7 +10,7 @@ COPY . ./
 WORKDIR /app
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/core/latest AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "BootcampDevOpsLab.dll"]
