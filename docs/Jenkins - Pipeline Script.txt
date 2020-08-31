@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    environment {
+        dotnet ='C:\\Program Files (x86)\\dotnet\\'
+    }
+    triggers {
+        pollSCM '* * * * *'
+    }
+    stages {
+        stage('Step 1 - Checkout') {
+            steps {
+                git url: 'https://github.com/czucherato/bootcamp-devops-lab.git', branch: 'master'
+            }
+        }
+        stage('Step 2 - Restore packages') {
+            steps {
+                bat 'dotnet restore BootcampDevOpsLab/BootcampDevOpsLab.csproj'
+            }
+        }
+        stage('Step 3 - Clean project') {
+            steps {
+                bat "dotnet clean BootcampDevOpsLab/BootcampDevOpsLab.csproj"
+            }
+        }
+        stage('Step 4 - Unit Tests') {
+            steps {
+                bat 'dotnet test BootcampDevOpsLab.Unit.Tests/BootcampDevOpsLab.Unit.Tests.csproj --logger trx'
+                step([$class: 'MSTestPublisher', testResultFile:"**/*.trx", failOnError: true, keepLongStdio: true])
+            }
+        }
+        stage('Step 5 - Integrated Tests') {
+            steps {
+                bat 'dotnet test BootcampDevOpsLab.Integrated.Tests/BootcampDevOpsLab.Integrated.Tests.csproj --logger trx'
+                step([$class: 'MSTestPublisher', testResultFile:"**/*.trx", failOnError: true, keepLongStdio: true])
+            }
+        }
+        stage('Step 6 - Build Project') {
+            steps {
+                bat "dotnet build BootcampDevOpsLab/BootcampDevOpsLab.csproj"
+            }
+        }
+        stage('Step 7 - Docker Publish') {
+            steps {
+                bat "docker rm -f app || echo 'No such container'"
+                bat "cd ${WORKSPACE}/BootcampDevOpsLab && docker build -t aspnetapp . && docker run -d -p 8083:80 --name app aspnetapp"
+            }
+        }
+   }
+       post { 
+        always { 
+            bat 'git clean -fdx'
+        }
+    }
+}
